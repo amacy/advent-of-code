@@ -16,13 +16,13 @@ RSpec.describe Day03 do
 
   context "part 2" do
     it "works for the sample input" do
-      expect(Day03.new("2x3x4").part_2).to eq 34
-      expect(Day03.new("1x1x10").part_2).to eq 14
-      expect(Day03.new("2x3x4\n1x1x10").part_2).to eq 48
+      # expect(Day03.new("^v").part_2).to eq 3
+      expect(Day03.new("^>v<").part_2).to eq 3
+      expect(Day03.new("^v^v^v^v^v").part_2).to eq 11
     end
 
     it "works for the input file" do
-      expect(Day03.new.part_2).to eq 1795
+      expect(Day03.new.part_2).to eq 2631
     end
   end
 end
