@@ -22,7 +22,7 @@ RSpec.describe Day02 do
     end
 
     it "works for the input file" do
-      expect(Day02.new.part_2).to eq 1795
+      expect(Day02.new.part_2).to eq 3812909
     end
   end
 end
