@@ -16,6 +16,9 @@ class Day02
   end
 
   def part_2
+    @input.inject(0) do |total_feet, dimensions|
+      total_feet += dimensions.min(2).sum * 2 + dimensions.inject(&:*)
+    end
   end
 
   def _parse_input(input)
