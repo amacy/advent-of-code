@@ -16,7 +16,7 @@ RSpec.describe Day03 do
 
   context "part 2" do
     it "works for the sample input" do
-      # expect(Day03.new("^v").part_2).to eq 3
+      expect(Day03.new("^v").part_2).to eq 3
       expect(Day03.new("^>v<").part_2).to eq 3
       expect(Day03.new("^v^v^v^v^v").part_2).to eq 11
     end
