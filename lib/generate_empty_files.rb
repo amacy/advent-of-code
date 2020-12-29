@@ -126,4 +126,4 @@ class GenerateEmptyFiles
   end
 end
 
-GenerateEmptyFiles.new.run
+GenerateEmptyFiles.new(ARGV.shift).run
