@@ -27,17 +27,20 @@ RSpec.describe Day05 do
 
   context "part 2" do
     it "works for the sample input" do
-      input_1 = "qjhvhtzxzqqjkmpb"
-      expect(Day05.new(input_1).part_2).to eq 1
+      # input_1 = "qjhvhtzxzqqjkmpb"
+      # expect(Day05.new(input_1).part_2).to eq 1
+      #
+      # input_2 = "xxyxx"
+      # expect(Day05.new(input_2).part_2).to eq 1
+      #
+      # input_3 = "uurcxstgmygtbstg"
+      # expect(Day05.new(input_3).part_2).to eq 0
+      #
+      # input_4 = "ieodomkazucvgmuy"
+      # expect(Day05.new(input_4).part_2).to eq 0
 
-      input_2 = "xxyxx"
-      expect(Day05.new(input_2).part_2).to eq 1
-
-      input_3 = "uurcxstgmygtbstg"
-      expect(Day05.new(input_3).part_2).to eq 0
-
-      input_4 = "ieodomkazucvgmuy"
-      expect(Day05.new(input_4).part_2).to eq 0
+      input_5 = "xxyxxx"
+      expect(Day05.new(input_5).part_2).to eq 0
     end
 
     it "works for the puzzle input" do

@@ -26,16 +26,57 @@ class Day05
       return false if array[index + 1..-1].empty?
 
       candidate = array[index - 1..index]
-      array[index + 1..-1].each_slice(2) do |s|
-        return true if candidate == s
+      sub_array_1 = array[index + 1..-1]
+      sub_array_1.each_slice(2).with_index do |slice, index|
+        if _slice_contains_repeating_pair?(
+            candidate,
+            sub_array_1,
+            slice,
+            index,
+            true,
+        )
+          return true
+        end
       end
 
-      array[index + 2..-1].each_slice(2) do |s|
-        return true if candidate == s
+      sub_array_2 = array[index + 2..-1]
+      sub_array_2.each_slice(2).with_index do |slice, index|
+        if _slice_contains_repeating_pair?(
+            candidate,
+            sub_array_2,
+            slice,
+            index,
+            false,
+        )
+          return true
+        end
       end
 
       index += 1
     end
+  end
+
+  def _slice_contains_repeating_pair?(candidate, array, slice, index, skip_repeating_check)
+    array = array.each_slice(2).to_a
+    return false if candidate != slice
+    return true if slice[0] != slice[1]
+    return true if skip_repeating_check
+
+    # need to repeat the blow logic for the slice it's being compared to, too
+    # verify not part of a longer repeating pattern
+    neighbor_index_1 = index - 1
+    binding.pry
+    if neighbor_index_1 >= 0 && slice[0] == array[neighbor_index_1][1]
+      return false
+    end
+
+    neighbor_index_2 = index + 1
+    binding.pry
+    if neighbor_index_2 < array.length && slice[0] == array[neighbor_index_2][0]
+      return false
+    end
+
+    true
   end
 
   def _contains_repeat_separated_by_one_letter?(array)
