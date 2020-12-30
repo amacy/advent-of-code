@@ -57,26 +57,30 @@ class Day05
   end
 
   def _slice_contains_repeating_pair?(candidate, array, slice, index, skip_repeating_check)
-    array = array.each_slice(2).to_a
     return false if candidate != slice
     return true if slice[0] != slice[1]
     return true if skip_repeating_check
 
-    # need to repeat the blow logic for the slice it's being compared to, too
-    # verify not part of a longer repeating pattern
-    neighbor_index_1 = index - 1
     binding.pry
-    if neighbor_index_1 >= 0 && slice[0] == array[neighbor_index_1][1]
+    array = array.each_slice(2).to_a
+    if _part_of_longer_sequence?(candidate, array, index) ||
+        _part_of_longer_sequence(candidate, array, array.index(slice))
+      false
+    else
+      true
+    end
+  end
+
+  def _part_of_longer_sequence?(candidate, array, index)
+    neighbor_index_1 = index - 1
+    if neighbor_index_1 >= 0 && candidate[0] == array[neighbor_index_1][1]
       return false
     end
 
     neighbor_index_2 = index + 1
-    binding.pry
-    if neighbor_index_2 < array.length && slice[0] == array[neighbor_index_2][0]
+    if neighbor_index_2 < array.length && candidate[0] == array[neighbor_index_2][0]
       return false
     end
-
-    true
   end
 
   def _contains_repeat_separated_by_one_letter?(array)
