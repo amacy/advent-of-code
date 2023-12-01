@@ -8,8 +8,8 @@ class GenerateEmptyFiles
     SPEC = "spec",
   ]
 
-  def initialize(year=Date.today.year)
-    @year = year.to_s
+  def initialize(year)
+    @year = year || Date.today.year.to_s
   end
 
   def run
