@@ -11,8 +11,10 @@ class Day19
     # solve part 2
   end
 
+  private
+
   def _parse_input(input)
-    input ||= File.read("config/day_19.txt")
+    input ||= File.read("config/2015/day_19.txt")
     # do something with the input
   end
 end
