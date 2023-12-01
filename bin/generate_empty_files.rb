@@ -49,8 +49,10 @@ class GenerateEmptyFiles
             # solve part 2
           end
 
+          private
+
           def _parse_input(input)
-            input ||= File.read("config/#{_config_file_name(day)}")
+            input ||= File.read("config/#{@year}/#{_config_file_name(day)}")
             # do something with the input
           end
         end
