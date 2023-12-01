@@ -20,8 +20,6 @@ class GenerateEmptyFiles
   end
 
   def _create_empty_directories
-    puts "creating directories"
-
     DIRECTORIES.each do |directory|
       Dir.mkdir(directory) if !Dir.exists?(directory)
       Dir.mkdir(File.join(directory, @year)) if !Dir.exists?(File.join(directory, @year))
@@ -100,10 +98,7 @@ class GenerateEmptyFiles
     DAYS.each do |n|
       day = _day(n)
       file_path = File.join(directory, @year, file_name.call(day))
-      if File.exists?(file_path)
-        puts "skipping #{file_path}"
-      else
-        puts "creating #{file_path}"
+      if !File.exists?(file_path)
         File.open(file_path, "w") do |file|
           file << contents.call(day)
         end
