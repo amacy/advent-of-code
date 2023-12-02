@@ -10,25 +10,9 @@ class Day02
   end
 
   def part_1
-    games = @input.split(/\n/).inject({}) do |hash, line|
-      game_id, remainder = line.match(/Game (\d+): (.*)/).captures
-
-      cubes = {}
-      remainder.split("; ").each do |set|
-        set.split(", ").each do |cube_str|
-          count, color = cube_str.split(" ")
-          cubes[color] ||= 0
-          cubes[color] = [count.to_i, cubes[color]].max
-        end
-      end
-
-      hash[game_id.to_i] = cubes
-      hash
-    end
-
     total = 0
 
-    games.each do |game|
+    @input.each do |game|
       colors_under_max = 0
       game[1].each do |color, count|
         if count <= LIMITS[color]
@@ -44,25 +28,9 @@ class Day02
   end
 
   def part_2
-    games = @input.split(/\n/).inject({}) do |hash, line|
-      game_id, remainder = line.match(/Game (\d+): (.*)/).captures
-
-      cubes = {}
-      remainder.split("; ").each do |set|
-        set.split(", ").each do |cube_str|
-          count, color = cube_str.split(" ")
-          cubes[color] ||= 0
-          cubes[color] = [count.to_i, cubes[color]].max
-        end
-      end
-
-      hash[game_id.to_i] = cubes
-      hash
-    end
-
     total = 0
 
-    games.each do |game|
+    @input.each do |game|
       game_total = 1
       game[1].values.each do |count|
         game_total *= count
@@ -77,5 +45,21 @@ class Day02
 
   def _parse_input(input)
     input ||= File.read("config/2023/day_02.txt")
+
+    input.split(/\n/).inject({}) do |hash, line|
+      game_id, remainder = line.match(/Game (\d+): (.*)/).captures
+
+      cubes = {}
+      remainder.split("; ").each do |set|
+        set.split(", ").each do |cube_str|
+          count, color = cube_str.split(" ")
+          cubes[color] ||= 0
+          cubes[color] = [count.to_i, cubes[color]].max
+        end
+      end
+
+      hash[game_id.to_i] = cubes
+      hash
+    end
   end
 end
