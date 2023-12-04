@@ -31,7 +31,29 @@ class Day04
   end
 
   def part_2
-    # solve part 2
+    counts = {}
+
+    @input.length.times do |n|
+      counts[n + 1] = 1
+    end
+
+    @input.each_with_index do |(winners, actuals), index|
+      card = index + 1
+      matches = []
+
+      actuals.each do |n|
+        if winners.include?(n)
+          matches << n
+        end
+      end
+
+      matches.length.times do |n|
+        break if counts[card + n + 1].nil?
+        counts[card + n + 1] += counts[card]
+      end
+    end
+
+    counts.values.sum
   end
 
   private
