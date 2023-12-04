@@ -6,14 +6,7 @@ class Day04
   def part_1
     total = 0
 
-    @input.each do |winners, actuals|
-      matches = []
-
-      actuals.each do |n|
-        if winners.include?(n)
-          matches << n
-        end
-      end
+    _solve do |matches, _|
 
       points = nil
       matches.length.times do
@@ -37,15 +30,8 @@ class Day04
       counts[n + 1] = 1
     end
 
-    @input.each_with_index do |(winners, actuals), index|
+    _solve do |matches, index|
       card = index + 1
-      matches = []
-
-      actuals.each do |n|
-        if winners.include?(n)
-          matches << n
-        end
-      end
 
       matches.length.times do |n|
         break if counts[card + n + 1].nil?
@@ -64,6 +50,20 @@ class Day04
       line.strip.split(/:/)[1].split(/ \| /).map do |section|
         section.split(" ").map(&:to_i)
       end
+    end
+  end
+
+  def _solve(&block)
+    @input.each_with_index do |(winners, actuals), index|
+      matches = []
+
+      actuals.each do |n|
+        if winners.include?(n)
+          matches << n
+        end
+      end
+
+      block.call(matches, index)
     end
   end
 end
