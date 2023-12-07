@@ -43,7 +43,61 @@ class Day05
   end
 
   def part_2
-    # solve part 2
+    map_queue, mappings = @input
+    binding.pry
+
+    results = {}
+
+    mappings.each_with_index do |(current_destination, mappings), index|
+      if current_destination.nil?
+        break
+      elsif results.empty?
+        # it's a single depth array for "seed"
+        mappings.each_slice(2) do |values|
+          results[values] = {current_destination => values}
+        end
+      else
+        current_source = map_queue[index - 1]
+        results[seed][current_destination] ||= []
+
+        results.each do |seed, values|
+          result_start, result_range_length = values[current_source]
+          result_end = result_start + result_range_length
+          destination_val = nil
+
+          # it's a nested array for the remainder
+          mappings.each do |(destination_start, source_start, range_length)|
+            source_end = source_start + range_length
+            if result_start.between?(source_start, source_end)
+              # TODO: convert to destination
+              start_offset = result_start - source_start
+              start = result_start + start_offset
+
+              if result_end.between?(source_start, source_end)
+                range_length = source_end - start
+                results[seed][current_destination] << [
+                  start,
+                  range_length,
+                ]
+              else
+                # add partial
+              end
+            elsif result_end.between?(source_start, source_end)
+              # add partial
+            else
+              results[seed][current_destination] << [
+                result_start,
+                result_range_length,
+              ]
+            end
+          end
+        end
+      end
+    end
+
+    results.values.map do |value|
+      value[map_queue.last]
+    end.min
   end
 
   private

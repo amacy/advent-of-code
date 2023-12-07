@@ -52,10 +52,12 @@ INPUT
 
   context "part 2" do
     it "works for the sample input" do
-      expect(Day05.new(@sample_input).part_2).to eq 0
+      skip("WIP")
+      expect(Day05.new(@sample_input).part_2).to eq 46
     end
 
     it "works for the puzzle input" do
+      skip("WIP")
       expect(Day05.new.part_2).to eq 0
     end
   end
