@@ -8,11 +8,12 @@ class Day05
 
     results = {}
 
-    mappings.each_with_index do |(current_destination, values), index|
+    mappings.each_with_index do |(current_destination, mappings), index|
       if current_destination.nil?
         break
       elsif results.empty?
-        values.each do |val|
+        # it's a single depth array for "seed"
+        mappings.each do |val|
           results[val] = {current_destination => val}
         end
       else
@@ -20,15 +21,24 @@ class Day05
 
         results.each do |seed, values|
           source_val = values[current_source]
-          destination_val = mappings[current_destination][source_val] ||
-            source_val
-          results[seed][current_destination] = destination_val
+          destination_val = nil
+
+          # it's a nested array for the remainder
+          mappings.each do |(destination_start, source_start, range_length)|
+            if (source_start..source_start + range_length).include?(source_val)
+              offset = source_val - source_start
+              destination_val = destination_start + offset
+              break
+            end
+          end
+
+          results[seed][current_destination] = destination_val || source_val
         end
       end
     end
 
-    results.values.map do |values|
-      values[map_queue.last]
+    results.values.map do |value|
+      value[map_queue.last]
     end.min
   end
 
@@ -49,17 +59,16 @@ class Day05
     lines[2..-1].each do |line|
       if match = line.match(/^#{current_source}-to-(\w+) map:$/)
         current_source = match.captures.first
-        mappings[current_source] = {}
+        mappings[current_source] = []
         map_queue << current_source
       elsif line.scan(/\d+/).map(&:to_i).length > 0
         destination_start, source_start, range_length = line.scan(/\d+/).map(&:to_i)
 
-        source_ns = source_start..source_start + range_length
-        destination_ns = (destination_start..destination_start + range_length).to_a
-
-        source_ns.each_with_index do |source_n, index|
-          mappings[current_source][source_n] = destination_ns[index]
-        end
+        mappings[current_source] << [
+          destination_start,
+          source_start,
+          range_length,
+        ]
       end
     end
 

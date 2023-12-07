@@ -46,7 +46,7 @@ INPUT
     end
 
     it "works for the puzzle input" do
-      expect(Day05.new.part_1).to eq 0
+      expect(Day05.new.part_1).to eq 331445006
     end
   end
 
