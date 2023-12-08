@@ -24,11 +24,11 @@ INPUT
 
   context "part 2" do
     it "works for the sample input" do
-      expect(Day07.new(@sample_input).part_2).to eq 0
+      expect(Day07.new(@sample_input).part_2).to eq 5905
     end
 
     it "works for the puzzle input" do
-      expect(Day07.new.part_2).to eq 0
+      expect(Day07.new.part_2).to eq 251224870
     end
   end
 end
