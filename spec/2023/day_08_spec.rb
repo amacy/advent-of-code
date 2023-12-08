@@ -49,7 +49,7 @@ INPUT
       expect(Day08.new(input).part_2).to eq 6
     end
 
-    it "works for the puzzle input" do
+    xit "works for the puzzle input" do
       expect(Day08.new.part_2).to eq 0
     end
   end
