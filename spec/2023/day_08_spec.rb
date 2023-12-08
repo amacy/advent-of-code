@@ -34,8 +34,19 @@ INPUT
 
   context "part 2" do
     it "works for the sample input" do
-      input = ""
-      expect(Day08.new(input).part_2).to eq 0
+      input = <<~INPUT
+LR
+
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)
+INPUT
+      expect(Day08.new(input).part_2).to eq 6
     end
 
     it "works for the puzzle input" do
