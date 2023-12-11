@@ -4,7 +4,13 @@ require_relative "../../lib/2023/day_10.rb"
 RSpec.describe Day10 do
   context "part 1" do
     it "works for the sample input" do
-      input = ""
+      input = <<~INPUT
+.....
+.F-7.
+.|.|.
+.L-J.
+.....
+INPUT
       expect(Day10.new(input).part_1).to eq 0
     end
 
